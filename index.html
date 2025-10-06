@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora Bella - Flores que cuentan historias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('local.jpg') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Secciones */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: #ff6b6b;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Paquetes */
+        .packages {
+            background-color: #fff;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .package-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover .package-img img {
+            transform: scale(1.1);
+        }
+
+        .package-content {
+            padding: 25px;
+        }
+
+        .package-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        .package-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        /* Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Información */
+        .info {
+            background-color: #fff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+
+        .info-card p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: #ff6b6b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+            animation: none;
+        }
+
+        .whatsapp-text {
+            position: fixed;
+            bottom: 90px;
+            right: 25px;
+            background: #25d366;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 99;
+        }
+
+        .whatsapp-float:hover + .whatsapp-text {
+            opacity: 1;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Flora Bella</h1>
+                <p>Flores que cuentan historias</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#paquetes">Paquetes</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Flores que cuentan historias</h2>
+            <p>Diseños únicos para cada ocasión especial</p>
+            <a href="#paquetes" class="btn">Descubre Nuestros Paquetes</a>
+        </div>
+    </section>
+
+    <!-- Paquetes Especiales -->
+    <section id="paquetes" class="packages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Paquetes Especiales</h2>
+                <p>Ofrecemos arreglos florales únicos para celebrar los momentos más especiales de tu vida</p>
+            </div>
+            <div class="packages-grid">
+                <!-- Aniversario -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="aniversario.jpg" alt="Paquete Aniversario">
+                    </div>
+                    <div class="package-content">
+                        <h3>Aniversario</h3>
+                        <p>Ramo de rosas (8 rosas), chocolates, una nota personalizada</p>
+                        <div class="package-price">$45</div>
+                        <a href="https://wa.me/50687236312?text=Hola,%20me%20interesa%20el%20paquete%20Aniversario%20de%20Flora%20Bella" class="btn">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Lunas de Miel -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="romanticroom.jpg" alt="Paquete Lunas de Miel">
+                    </div>
+                    <div class="package-content">
+                        <h3>Lunas de Miel</h3>
+                        <p>Dos globos, bolsa de pétalos, velas (5), ramo de rosas (5 rosas), nota personalizada</p>
+                        <div class="package-price">$45</div>
+                        <a href="https://wa.me/50687236312?text=Hola,%20me%20interesa%20el%20paquete%20Lunas%20de%20Miel%20de%20Flora%20Bella" class="btn">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Cenas Románticas -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="cena.jpg" alt="Paquete Cenas Románticas">
+                    </div>
+                    <div class="package-content">
+                        <h3>Cenas Románticas</h3>
+                        <p>Velas (5), bolsa de pétalos, ramo de rosas (8 rosas), nota personalizada</p>
+                        <div class="package-price">$50</div>
+                        <a href="https://wa.me/50687236312?text=Hola,%20me%20interesa%20el%20paquete%20Cenas%20Románticas%20de%20Flora%20Bella" class="btn">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Compromisos -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="suspirorosa.jpg" alt="Paquete Compromisos">
+                    </div>
+                    <div class="package-content">
+                        <h3>Compromisos</h3>
+                        <p>Ramo de rosas (8 rosas), nota personalizada</p>
+                        <div class="package-price">$40</div>
+                        <a href="https://wa.me/50687236312?text=Hola,%20me%20interesa%20el%20paquete%20Compromisos%20de%20Flora%20Bella" class="btn">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Diseños</h2>
+                <p>Descubre la belleza y creatividad de nuestros arreglos florales</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="ramoliriosydragon.jpg" alt="Ramo de Lirios y Dragón">
+                </div>
+                <div class="gallery-item">
+                    <img src="suspirorosa.jpg" alt="Suspiro Rosa">
+                </div>
+                <div class="gallery-item">
+                    <img src="tropical.jpg" alt="Arreglo Tropical">
+                </div>
+                <div class="gallery-item">
+                    <img src="aniversario.jpg" alt="Aniversario">
+                </div>
+                <div class="gallery-item">
+                    <img src="cena.jpg" alt="Cena Romántica">
+                </div>
+                <div class="gallery-item">
+                    <img src="romanticroom.jpg" alt="Habitación Romántica">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información -->
+    <section class="info">
+        <div class="container">
+            <div class="section-title">
+                <h2>Información de Contacto</h2>
+                <p>Visítanos o contáctanos para crear el arreglo floral perfecto para tu ocasión especial</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horario de Atención</h3>
+                    <p>Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+                    <p>Domingos: 10:00 AM - 5:00 PM</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Ubicación</h3>
+                    <p>Centro Comercial Econofarma</p>
+                    <p>Los Ángeles de la Fortuna</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Contacto</h3>
+                    <p>Teléfono/WhatsApp: 506 8723 6312</p>
+                    <p>Email: info@florabella.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Flora Bella</h3>
+                    <p>Flores que cuentan historias. Creamos diseños únicos para cada ocasión especial.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/flora.bella_floristeria" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/50687236312" target="_blank" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#paquetes">Paquetes</a>
+                    <a href="#galeria">Galería</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Centro Comercial Econofarma</p>
+                    <p>Los Ángeles de la Fortuna</p>
+                    <p><i class="fas fa-phone"></i> Tel: 506 8723 6312</p>
+                    <p><i class="fas fa-clock"></i> Horario: L-S 9am-7pm, D 10am-5pm</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Flora Bella. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/50687236312?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20productos%20de%20Flora%20Bella" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-text">¡Contáctanos!</div>
+
+    <script>
+        // Efecto de aparición al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Aplicar a las tarjetas de paquetes
+            const packageCards = document.querySelectorAll('.package-card');
+            packageCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+
+            // Aplicar a las tarjetas de información
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+
+            // Aplicar a los elementos de la galería
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
